@@ -1,1 +1,8 @@
 .env
+# Ignora ejecutables típicos en C
+servidor
+cliente
+main
+*.out
+*.exe
+*.o
