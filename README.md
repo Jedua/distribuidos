@@ -18,7 +18,7 @@ Este repositorio contiene los proyectos, ejercicios y materiales desarrollados c
 
 ## 👨🏫 Profesor
 **Antonio López Jaimes**  
-Departamento de Computación  
+DCNI -> Ingeniería en Computación  
 Universidad Autónoma Metropolitana, Unidad Cuajimalpa
 
 ---
