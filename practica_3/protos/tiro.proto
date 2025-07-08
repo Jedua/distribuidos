@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package tiro;
+
+import "google/protobuf/empty.proto";
+
+service TiroAlBlanco {
+  rpc dimeCentroDiana(google.protobuf.Empty) returns (Centro);
+  rpc disparaCanon(DisparoRequest) returns (DisparoResponse);
+  rpc mejorDisparo(google.protobuf.Empty) returns (MejorDisparo);
+}
+
+message Centro {
+  double valor = 1;
+}
+
+message DisparoRequest {
+  string nombre = 1;
+  double angulo = 2;
+  double velocidad = 3;
+}
+
+message DisparoResponse {
+  double distancia = 1;
+}
+
+message MejorDisparo {
+  string nombre = 1;
+  double distancia = 2;
+}
