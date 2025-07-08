@@ -4,7 +4,11 @@ package helloworld;
 
 service Greeter {
   rpc SayHello (HelloRequest) returns (HelloReply) {}
-  rpc SayHelloAgain (HelloRequest) returns (HelloReply) {} // Nuevo método
+  rpc SayHelloAgain (HelloRequest) returns (HelloReply) {}
+
+  // Nuevos métodos para fechas
+  rpc siguienteFecha (Fecha) returns (Fecha) {}
+  rpc sumaDiasFecha (SumaFechaRequest) returns (Fecha) {}
 }
 
 message HelloRequest {
@@ -13,4 +17,15 @@ message HelloRequest {
 
 message HelloReply {
   string message = 1;
+}
+
+message Fecha {
+  int32 dia = 1;
+  int32 mes = 2;
+  int32 anio = 3;
+}
+
+message SumaFechaRequest {
+  Fecha fecha = 1;
+  int32 dias = 2;
 }
