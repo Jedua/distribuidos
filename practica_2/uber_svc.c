@@ -16,16 +16,20 @@
 #define SIG_PF void(*)(int)
 #endif
 
-static void
+void
 uberprog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 {
 	union {
 		Posicion solicitar_viaje_1_arg;
 		TerminaViajeArgs terminar_viaje_1_arg;
 	} argument;
-	char *result;
+	union {
+		InfoAuto solicitar_viaje_1_res;
+		InfoServicio estado_servicio_1_res;
+	} result;
+	bool_t retval;
 	xdrproc_t _xdr_argument, _xdr_result;
-	char *(*local)(char *, struct svc_req *);
+	bool_t (*local)(char *, void *, struct svc_req *);
 
 	switch (rqstp->rq_proc) {
 	case NULLPROC:
@@ -35,19 +39,19 @@ uberprog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 	case solicitar_viaje:
 		_xdr_argument = (xdrproc_t) xdr_Posicion;
 		_xdr_result = (xdrproc_t) xdr_InfoAuto;
-		local = (char *(*)(char *, struct svc_req *)) solicitar_viaje_1_svc;
+		local = (bool_t (*) (char *, void *,  struct svc_req *))solicitar_viaje_1_svc;
 		break;
 
 	case terminar_viaje:
 		_xdr_argument = (xdrproc_t) xdr_TerminaViajeArgs;
 		_xdr_result = (xdrproc_t) xdr_void;
-		local = (char *(*)(char *, struct svc_req *)) terminar_viaje_1_svc;
+		local = (bool_t (*) (char *, void *,  struct svc_req *))terminar_viaje_1_svc;
 		break;
 
 	case estado_servicio:
 		_xdr_argument = (xdrproc_t) xdr_void;
 		_xdr_result = (xdrproc_t) xdr_InfoServicio;
-		local = (char *(*)(char *, struct svc_req *)) estado_servicio_1_svc;
+		local = (bool_t (*) (char *, void *,  struct svc_req *))estado_servicio_1_svc;
 		break;
 
 	default:
@@ -59,46 +63,16 @@ uberprog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 		svcerr_decode (transp);
 		return;
 	}
-	result = (*local)((char *)&argument, rqstp);
-	if (result != NULL && !svc_sendreply(transp, (xdrproc_t) _xdr_result, result)) {
+	retval = (bool_t) (*local)((char *)&argument, (void *)&result, rqstp);
+	if (retval > 0 && !svc_sendreply(transp, (xdrproc_t) _xdr_result, (char *)&result)) {
 		svcerr_systemerr (transp);
 	}
 	if (!svc_freeargs (transp, (xdrproc_t) _xdr_argument, (caddr_t) &argument)) {
 		fprintf (stderr, "%s", "unable to free arguments");
 		exit (1);
 	}
+	if (!uberprog_1_freeresult (transp, _xdr_result, (caddr_t) &result))
+		fprintf (stderr, "%s", "unable to free results");
+
 	return;
-}
-
-int
-main (int argc, char **argv)
-{
-	register SVCXPRT *transp;
-
-	pmap_unset (UBERPROG, UBERVERS);
-
-	transp = svcudp_create(RPC_ANYSOCK);
-	if (transp == NULL) {
-		fprintf (stderr, "%s", "cannot create udp service.");
-		exit(1);
-	}
-	if (!svc_register(transp, UBERPROG, UBERVERS, uberprog_1, IPPROTO_UDP)) {
-		fprintf (stderr, "%s", "unable to register (UBERPROG, UBERVERS, udp).");
-		exit(1);
-	}
-
-	transp = svctcp_create(RPC_ANYSOCK, 0, 0);
-	if (transp == NULL) {
-		fprintf (stderr, "%s", "cannot create tcp service.");
-		exit(1);
-	}
-	if (!svc_register(transp, UBERPROG, UBERVERS, uberprog_1, IPPROTO_TCP)) {
-		fprintf (stderr, "%s", "unable to register (UBERPROG, UBERVERS, tcp).");
-		exit(1);
-	}
-
-	svc_run ();
-	fprintf (stderr, "%s", "svc_run returned");
-	exit (1);
-	/* NOTREACHED */
 }

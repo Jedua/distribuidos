@@ -8,6 +8,7 @@
 
 #include <rpc/rpc.h>
 
+#include <pthread.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -28,9 +29,9 @@ enum TipoUber {
 typedef enum TipoUber TipoUber;
 
 struct InfoAuto {
-	int disponible;
-	struct Posicion pos;
-	enum TipoUber tipo;
+	bool_t disponible;
+	Posicion pos;
+	TipoUber tipo;
 	int tarifa;
 	char *placas;
 };
@@ -55,26 +56,26 @@ typedef struct TerminaViajeArgs TerminaViajeArgs;
 
 #if defined(__STDC__) || defined(__cplusplus)
 #define solicitar_viaje 1
-extern  InfoAuto * solicitar_viaje_1(Posicion *, CLIENT *);
-extern  InfoAuto * solicitar_viaje_1_svc(Posicion *, struct svc_req *);
+extern  enum clnt_stat solicitar_viaje_1(Posicion *, InfoAuto *, CLIENT *);
+extern  bool_t solicitar_viaje_1_svc(Posicion *, InfoAuto *, struct svc_req *);
 #define terminar_viaje 2
-extern  void * terminar_viaje_1(TerminaViajeArgs *, CLIENT *);
-extern  void * terminar_viaje_1_svc(TerminaViajeArgs *, struct svc_req *);
+extern  enum clnt_stat terminar_viaje_1(TerminaViajeArgs *, void *, CLIENT *);
+extern  bool_t terminar_viaje_1_svc(TerminaViajeArgs *, void *, struct svc_req *);
 #define estado_servicio 3
-extern  InfoServicio * estado_servicio_1(void *, CLIENT *);
-extern  InfoServicio * estado_servicio_1_svc(void *, struct svc_req *);
+extern  enum clnt_stat estado_servicio_1(void *, InfoServicio *, CLIENT *);
+extern  bool_t estado_servicio_1_svc(void *, InfoServicio *, struct svc_req *);
 extern int uberprog_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
 
 #else /* K&R C */
 #define solicitar_viaje 1
-extern  InfoAuto * solicitar_viaje_1();
-extern  InfoAuto * solicitar_viaje_1_svc();
+extern  enum clnt_stat solicitar_viaje_1();
+extern  bool_t solicitar_viaje_1_svc();
 #define terminar_viaje 2
-extern  void * terminar_viaje_1();
-extern  void * terminar_viaje_1_svc();
+extern  enum clnt_stat terminar_viaje_1();
+extern  bool_t terminar_viaje_1_svc();
 #define estado_servicio 3
-extern  InfoServicio * estado_servicio_1();
-extern  InfoServicio * estado_servicio_1_svc();
+extern  enum clnt_stat estado_servicio_1();
+extern  bool_t estado_servicio_1_svc();
 extern int uberprog_1_freeresult ();
 #endif /* K&R C */
 

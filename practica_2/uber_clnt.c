@@ -9,47 +9,29 @@
 /* Default timeout can be changed using clnt_control() */
 static struct timeval TIMEOUT = { 25, 0 };
 
-InfoAuto *
-solicitar_viaje_1(Posicion *argp, CLIENT *clnt)
+enum clnt_stat 
+solicitar_viaje_1(Posicion *argp, InfoAuto *clnt_res, CLIENT *clnt)
 {
-	static InfoAuto clnt_res;
-
-	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call (clnt, solicitar_viaje,
+	return (clnt_call(clnt, solicitar_viaje,
 		(xdrproc_t) xdr_Posicion, (caddr_t) argp,
-		(xdrproc_t) xdr_InfoAuto, (caddr_t) &clnt_res,
-		TIMEOUT) != RPC_SUCCESS) {
-		return (NULL);
-	}
-	return (&clnt_res);
+		(xdrproc_t) xdr_InfoAuto, (caddr_t) clnt_res,
+		TIMEOUT));
 }
 
-void *
-terminar_viaje_1(TerminaViajeArgs *argp, CLIENT *clnt)
+enum clnt_stat 
+terminar_viaje_1(TerminaViajeArgs *argp, void *clnt_res, CLIENT *clnt)
 {
-	static char clnt_res;
-
-	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call (clnt, terminar_viaje,
+	return (clnt_call(clnt, terminar_viaje,
 		(xdrproc_t) xdr_TerminaViajeArgs, (caddr_t) argp,
-		(xdrproc_t) xdr_void, (caddr_t) &clnt_res,
-		TIMEOUT) != RPC_SUCCESS) {
-		return (NULL);
-	}
-	return ((void *)&clnt_res);
+		(xdrproc_t) xdr_void, (caddr_t) clnt_res,
+		TIMEOUT));
 }
 
-InfoServicio *
-estado_servicio_1(void *argp, CLIENT *clnt)
+enum clnt_stat 
+estado_servicio_1(void *argp, InfoServicio *clnt_res, CLIENT *clnt)
 {
-	static InfoServicio clnt_res;
-
-	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call (clnt, estado_servicio,
+	return (clnt_call(clnt, estado_servicio,
 		(xdrproc_t) xdr_void, (caddr_t) argp,
-		(xdrproc_t) xdr_InfoServicio, (caddr_t) &clnt_res,
-		TIMEOUT) != RPC_SUCCESS) {
-		return (NULL);
-	}
-	return (&clnt_res);
+		(xdrproc_t) xdr_InfoServicio, (caddr_t) clnt_res,
+		TIMEOUT));
 }

@@ -10,9 +10,9 @@ enum TipoUber {
 };
 
 struct InfoAuto {
-    int disponible;
-    struct Posicion pos;
-    enum TipoUber tipo;
+    bool disponible;
+    Posicion pos;
+    TipoUber tipo;
     int tarifa;
     string placas<16>;
 };

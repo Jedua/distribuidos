@@ -32,7 +32,7 @@ xdr_InfoAuto (XDR *xdrs, InfoAuto *objp)
 {
 	register int32_t *buf;
 
-	 if (!xdr_int (xdrs, &objp->disponible))
+	 if (!xdr_bool (xdrs, &objp->disponible))
 		 return FALSE;
 	 if (!xdr_Posicion (xdrs, &objp->pos))
 		 return FALSE;
