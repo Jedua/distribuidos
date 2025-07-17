@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package uber;
+
+import "google/protobuf/empty.proto";
+
+service UberService {
+  rpc solicitarViaje(Posicion) returns (InfoAuto);
+  rpc terminarViaje(TerminaViajeArgs) returns (ResultadoViaje);
+  rpc estadoServicio(google.protobuf.Empty) returns (InfoServicio);
+}
+
+message Posicion {
+  double latitud = 1;
+  double longitud = 2;
+}
+
+message InfoAuto {
+  int32 id = 1;
+  Posicion posicion = 2;
+  double distancia = 3;
+  double precio = 4;
+}
+
+message TerminaViajeArgs {
+  int32 id_auto = 1;
+  Posicion posicion = 2;
+}
+
+message InfoServicio {
+  int32 total_viajes = 1;
+  repeated Auto autos = 2;
+}
+
+message Auto {
+  int32 id = 1;
+  Posicion posicion = 2;
+  bool disponible = 3;
+}
+
+message ResultadoViaje {
+  double precio = 1;
+}
