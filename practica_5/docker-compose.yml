@@ -1,0 +1,44 @@
+services:
+  coordinador:
+    build: .
+    container_name: nodo0
+    environment:
+      - TMK_PROC_ID=0
+      - TMK_NPROCS=3
+    networks:
+      practired:
+        ipv4_address: 172.28.0.2
+    command: ./suma_tmk
+
+  nodo1:
+    build: .
+    container_name: nodo1
+    environment:
+      - TMK_PROC_ID=1
+      - TMK_NPROCS=3
+    depends_on:
+      - coordinador
+    networks:
+      practired:
+        ipv4_address: 172.28.0.3
+    command: ./suma_tmk
+
+  nodo2:
+    build: .
+    container_name: nodo2
+    environment:
+      - TMK_PROC_ID=2
+      - TMK_NPROCS=3
+    depends_on:
+      - coordinador
+    networks:
+      practired:
+        ipv4_address: 172.28.0.4
+    command: ./suma_tmk
+
+networks:
+  practired:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
