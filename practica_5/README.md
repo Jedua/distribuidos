@@ -21,9 +21,9 @@ Este proyecto demuestra una implementación básica de TreadMarks distribuido, q
 
 2. Ejecuta los siguientes comandos en orden:
 
-docker-compose down        # Elimina contenedores previos
-docker-compose build       # Compila el proyecto en los contenedores
-docker-compose up          # Inicia la ejecución distribuida
+- docker-compose down        # Elimina contenedores previos
+- docker-compose build       # Compila el proyecto en los contenedores
+- docker-compose up          # Inicia la ejecución distribuida
 
 
 3. Al finalizar la ejecución, verás en consola los mensajes de los nodos y la suma total calculada distribuida por los procesos.
