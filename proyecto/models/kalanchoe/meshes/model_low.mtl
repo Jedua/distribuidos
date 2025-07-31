@@ -1,0 +1,24 @@
+# Blender MTL File: 'None'
+# Material Count: 2
+
+newmtl PlGrasse_1M_lisse_Material_u1_v1.002
+Ns 0.000000
+Ka 0.250000 0.250000 0.250000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd PlGrasse_1M_lisse_u1_v1.jpg
+
+newmtl PlGrasse_1M_lisse_Material_u2_v1.002
+Ns 81.000006
+Ka 0.500000 0.500000 0.500000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd PlGrasse_1M_lisse_u2_v1.jpg

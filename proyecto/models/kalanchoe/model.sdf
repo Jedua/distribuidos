@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <model name="kalanchoe">
+    <static>false</static>
+    <pose>0 0 0.0 0 0 0</pose>
+    <link name="kalanchoe_link">
+      <inertial>
+        <mass>2</mass>
+        <inertia>
+          <ixx>0.045</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.045</iyy>
+          <iyz>0</iyz>
+          <izz>0.057</izz>
+        </inertia>
+        <pose>0 0 0.1 0 0 0</pose>
+      </inertial>
+
+      <collision name="kalanchoe_collision_base">
+        <pose>0 0 0.024 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.13</radius>
+            <length>0.045</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <collision name="kalanchoe_collision_hojas">
+        <pose>0 0 0.197 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.18</radius>
+            <length>0.30</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      
+      <visual name="kalanchoe_visual">
+        <cast_shadows>1</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>meshes/model_hi.obj</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name="mariposa_1_link">
+      <pose>0.4 0.15 0.5 0 0 0</pose>
+      <inertial>
+        <mass>0.0</mass>
+      </inertial>
+      <visual name="mariposa_1_visual">
+        <cast_shadows>1</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>meshes/mariposas/model_1.obj</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='link_kalan_JOINT_mariposa_1' type='fixed'>
+      <parent>kalanchoe_link</parent>
+      <child>mariposa_1_link</child>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+    </joint>
+
+    <link name="mariposa_2_link">
+      <pose>0.3 -0.2 0.4 0 0.78 3.14116</pose>
+      <inertial>
+        <mass>0.0</mass>
+      </inertial>
+      <visual name="mariposa_2_visual">
+        <cast_shadows>1</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>meshes/mariposas/model_2.obj</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='link_kalan_JOINT_mariposa_2' type='fixed'>
+      <parent>kalanchoe_link</parent>
+      <child>mariposa_2_link</child>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+    </joint>
+
+  </model>
+</sdf>

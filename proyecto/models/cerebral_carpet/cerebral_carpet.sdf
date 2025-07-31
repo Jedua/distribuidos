@@ -1,0 +1,24 @@
+<?xml version='1.0'?>
+<sdf version="1.6">
+<model name="cerebral_carpet">
+  <static>true</static>
+    <link name="link_carpet">
+      <!-- <pose>0.0 -4.0 0.01 0 0 0</pose> -->
+      <visual name="visual_carpet">
+        <geometry>
+          <mesh>
+            <uri>model://cerebral_carpet/meshes/cerebral_carpet.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <!-- <collision name="collision_carpet">
+        <geometry>
+          <cylinder>
+            <radius>0.75</radius>
+            <length>0.01</length>
+          </cylinder>
+        </geometry>
+      </collision> -->
+    </link>
+  </model>
+</sdf>

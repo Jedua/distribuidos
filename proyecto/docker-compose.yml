@@ -1,0 +1,16 @@
+version: '3'
+services:
+  ros2_dev:
+    build: .
+    container_name: ros2_dev
+    image: ros2_humble
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./proyecto:/root/ros2_ws/src/proyecto
+    networks:
+      - rosnet
+
+networks:
+  rosnet:
+    driver: bridge

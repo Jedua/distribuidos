@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<sdf version="1.6">
+<model name="llave_agua">
+  <static>true</static>
+    <link name="link">
+      <inertial>
+        <mass>1</mass>
+        <inertia>
+          <ixx>0.2</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.2</iyy>
+          <iyz>0</iyz>
+          <izz>0.2</izz>
+        </inertia>
+        <pose frame=''>0 0 0.36 0 0 0</pose>
+      </inertial>
+      <visual name="visual">
+        <cast_shadows>1</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://llave_agua/meshes/model.dae</uri>
+          </mesh>
+        </geometry>
+        <pose frame=''>0 0 0 0 0 0</pose>
+      </visual>
+      <collision name="collision_0">
+        <pose>0.16 -0.005 0.17 3.14159 1.57079 3.14159</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.04</radius>
+            <length>0.58</length>
+          </cylinder>
+        </geometry>
+      </collision>
+    </link>
+  </model>
+</sdf>
