@@ -5,7 +5,19 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/usr/include",
-                "/usr/include/tirpc"
+                "/usr/include/tirpc",
+                "${workspaceFolder}/practica_2"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/sbin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "c++98",
+            "intelliSenseMode": "linux-gcc-x64"
+        },
+        {
+            "name": "add",
+            "includePath": [
+                "${workspaceFolder}/**"
             ],
             "defines": [],
             "compilerPath": "/usr/sbin/gcc",
